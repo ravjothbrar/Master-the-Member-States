@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronRight, Check, X, Flag, Type } from 'lucide-react';
-import { getFlagUrl } from '../data/memberStates';
+import FlagImage from './FlagImage';
 
 const Quiz = ({ questions, onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -133,11 +133,11 @@ const Quiz = ({ questions, onComplete }) => {
                 What is the <strong className="text-[#009EDB]">official UN name</strong> of this member state?
               </p>
               <div className="flex justify-center mb-6">
-                <img
-                  src={getFlagUrl(currentQuestion.correctAnswer.code, 'w320')}
+                <FlagImage
+                  code={currentQuestion.correctAnswer.code}
+                  size="w320"
                   alt="Flag"
                   className="w-48 md:w-64 h-auto rounded-lg flag-shadow transition-transform duration-300 hover:scale-105"
-                  loading="eager"
                 />
               </div>
             </>
@@ -181,8 +181,9 @@ const Quiz = ({ questions, onComplete }) => {
                     <span className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-sm font-bold text-gray-600 shadow-sm">
                       {String.fromCharCode(65 + index)}
                     </span>
-                    <img
-                      src={getFlagUrl(option.code, 'w80')}
+                    <FlagImage
+                      code={option.code}
+                      size="w80"
                       alt={`Option ${String.fromCharCode(65 + index)}`}
                       className="w-14 h-9 object-cover rounded-md flag-shadow"
                     />
