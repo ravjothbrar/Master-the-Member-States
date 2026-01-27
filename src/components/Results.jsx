@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Trophy, RotateCcw, Home, CheckCircle, XCircle, Flag } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { getFlagUrl } from '../data/memberStates';
+import FlagImage from './FlagImage';
 
 const Results = ({ results, onRestart, onHome }) => {
   const { score, totalQuestions, answers } = results;
@@ -128,8 +128,9 @@ const Results = ({ results, onRestart, onHome }) => {
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-2">
-                      <img
-                        src={getFlagUrl(answer.question.correctAnswer.code, 'w40')}
+                      <FlagImage
+                        code={answer.question.correctAnswer.code}
+                        size="w40"
                         alt={answer.question.correctAnswer.shortName}
                         className="w-8 h-5 object-cover rounded flag-shadow"
                       />
@@ -147,7 +148,7 @@ const Results = ({ results, onRestart, onHome }) => {
                       <p className="text-sm text-red-600">
                         <span className="font-medium">Your answer:</span>{' '}
                         {answer.question.type === 'flagToName'
-                          ? answer.selectedAnswer.officialName
+                          ? answer.selectedAnswer.name
                           : answer.selectedAnswer.shortName}
                       </p>
                     )}
