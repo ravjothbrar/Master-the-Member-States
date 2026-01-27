@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - claude/mun-study-tool-wp9Zk
   workflow_dispatch:
 
 permissions:
