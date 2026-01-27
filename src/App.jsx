@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header onHomeClick={handleGoHome} />
 
       {currentView === VIEWS.LANDING && (
         <LandingPage onStartQuiz={handleStartQuizConfig} />
