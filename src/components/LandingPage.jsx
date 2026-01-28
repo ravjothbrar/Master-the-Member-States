@@ -10,16 +10,12 @@ const LandingPage = ({ onStartQuiz }) => {
     }`}>
       {/* Hero Section */}
       <section className="page-transition">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-          {/* File-style header */}
-          <div className={`font-mono text-sm mb-2 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-            ~/mun-tools/
-          </div>
-          <div className={`font-mono text-sm mb-8 flex items-center gap-2 ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
-            <span className="opacity-60">#</span> README.md
-          </div>
-
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-24">
           <div className="max-w-3xl">
+            <div className={`font-mono text-sm mb-4 theme-transition ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
+              // Model United Nations Study Tool
+            </div>
+
             <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 theme-transition ${
               isDark ? 'text-white' : 'text-gray-900'
             }`}>
@@ -30,23 +26,19 @@ const LandingPage = ({ onStartQuiz }) => {
               </span>
             </h1>
 
-            {/* Description in code-block style */}
-            <div className={`font-mono text-sm mb-8 p-4 rounded-lg border-l-4 border-[#009EDB] ${
-              isDark ? 'bg-[#1a1a2e]/50' : 'bg-[#009EDB]/5'
+            <p className={`text-lg mb-8 leading-relaxed theme-transition ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                <span className="text-[#009EDB]">{'>'}</span> An interactive quiz tool for Model UN delegates to master
-                the official nomenclature used by the{' '}
-                <span className={`${isDark ? 'text-white' : 'text-gray-900'} font-medium`}>UN Protocol and Liaison Service</span>.
-              </p>
-            </div>
+              An interactive quiz tool for Model UN delegates to master the official nomenclature
+              used by the UN Protocol and Liaison Service.
+            </p>
 
             <button
               onClick={onStartQuiz}
               className="group inline-flex items-center gap-3 px-6 py-3.5 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded-lg transition-all duration-300 hover-glow"
             >
-              <span className="font-mono opacity-80">$</span>
-              <span>./start-quiz</span>
+              <span className="font-mono text-sm opacity-80">{'>>'}</span>
+              <span>Start Quiz</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
@@ -60,45 +52,33 @@ const LandingPage = ({ onStartQuiz }) => {
       <section className="page-transition">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
           <div className="max-w-3xl">
-            {/* Section header */}
-            <div className={`font-mono text-sm mb-6 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-              <span className={`${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>##</span> mission.md
-            </div>
-
-            <div className={`flex items-center gap-3 mb-6`}>
-              <div className={`h-px flex-1 max-w-[40px] ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
-              <h2 className={`text-xl font-bold tracking-wide uppercase ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
+            <div className={`flex items-center gap-3 mb-6 ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
+              <span className="font-mono text-lg font-bold">||</span>
+              <h2 className={`text-xl font-bold tracking-wide uppercase`}>
                 Project Mission
               </h2>
-              <div className={`h-px flex-1 ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
+              <span className="font-mono text-lg font-bold">||</span>
             </div>
 
-            <div className={`space-y-4 leading-relaxed theme-transition ${
+            <div className={`accent-border-left space-y-4 leading-relaxed theme-transition ${
               isDark ? 'text-gray-300' : 'text-gray-700'
             }`} style={{ fontSize: '1.05rem' }}>
-              <div className={`p-4 rounded-lg border ${isDark ? 'bg-[#1a1a2e]/30 border-[#009EDB]/10' : 'bg-white border-[#009EDB]/10'}`}>
-                <p className="terminal-line">
-                  In Model United Nations conferences, delegates represent member states and engage in diplomatic discourse.
-                  However, many participants inadvertently use informal or abbreviated names for countries—such as{' '}
-                  <code className={`px-1.5 py-0.5 rounded text-sm font-mono ${isDark ? 'bg-[#009EDB]/20 text-[#009EDB]' : 'bg-[#009EDB]/10 text-[#009EDB]'}`}>"UK"</code>{' '}
-                  instead of{' '}
-                  <code className={`px-1.5 py-0.5 rounded text-sm font-mono ${isDark ? 'bg-[#009EDB]/20 text-[#009EDB]' : 'bg-[#009EDB]/10 text-[#009EDB]'}`}>"United Kingdom of Great Britain and Northern Ireland"</code>.
-                </p>
-              </div>
+              <p className="terminal-line">
+                In Model United Nations conferences, delegates represent member states and engage in diplomatic discourse.
+                However, many participants inadvertently use informal or abbreviated names for countries—such as "UK"
+                instead of "United Kingdom of Great Britain and Northern Ireland."
+              </p>
 
-              <div className={`p-4 rounded-lg border ${isDark ? 'bg-[#1a1a2e]/30 border-[#009EDB]/10' : 'bg-white border-[#009EDB]/10'}`}>
-                <p className="terminal-line">
-                  The <span className="text-[#009EDB] font-semibold">UN Protocol and Liaison Service</span> maintains specific official nomenclature for all 193 member
-                  states. Using correct names demonstrates respect for national sovereignty and adherence to diplomatic protocol.
-                </p>
-              </div>
+              <p className="terminal-line">
+                The <span className="text-[#009EDB] font-semibold">UN Protocol and Liaison Service</span> maintains
+                specific official nomenclature for all 193 member states. Using correct names demonstrates respect
+                for national sovereignty and adherence to diplomatic protocol.
+              </p>
 
-              <div className={`p-4 rounded-lg border ${isDark ? 'bg-[#1a1a2e]/30 border-[#009EDB]/10' : 'bg-white border-[#009EDB]/10'}`}>
-                <p className="terminal-line">
-                  <span className="text-[#009EDB] font-semibold">Master the Member States</span> was created to bridge this knowledge gap, helping MUN delegates memorise
-                  the official names through interactive quizzes.
-                </p>
-              </div>
+              <p className="terminal-line">
+                <span className="text-[#009EDB] font-semibold">Master the Member States</span> was created to bridge
+                this knowledge gap, helping MUN delegates memorise the official names through interactive quizzes.
+              </p>
             </div>
           </div>
         </div>
@@ -110,36 +90,28 @@ const LandingPage = ({ onStartQuiz }) => {
       {/* How It Works */}
       <section className="page-transition">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
-          {/* Section header */}
-          <div className={`font-mono text-sm mb-6 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-            <span className={`${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>##</span> how-it-works.md
-          </div>
-
-          <div className={`flex items-center gap-3 mb-10`}>
-            <div className={`h-px flex-1 max-w-[40px] ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
-            <h2 className={`text-xl font-bold tracking-wide uppercase ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
+          <div className={`flex items-center gap-3 mb-10 ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
+            <span className="font-mono text-lg font-bold">||</span>
+            <h2 className={`text-xl font-bold tracking-wide uppercase`}>
               How It Works
             </h2>
-            <div className={`h-px flex-1 ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
+            <span className="font-mono text-lg font-bold">||</span>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: Flag,
-                step: '01',
                 title: 'Choose Your Mode',
                 desc: 'Select Flag to Name, Name to Flag, or Mixed mode. Pick 10, 20, 50, or all 193 member states.'
               },
               {
                 icon: CheckCircle,
-                step: '02',
                 title: 'Test Your Knowledge',
                 desc: 'Questions are designed with tricky informal names as options. Can you identify the official UN spelling?'
               },
               {
                 icon: BarChart3,
-                step: '03',
                 title: 'Review & Improve',
                 desc: 'Get instant feedback on each question. Review all answers at the end to learn from mistakes.'
               }
@@ -148,17 +120,12 @@ const LandingPage = ({ onStartQuiz }) => {
               return (
                 <div
                   key={index}
-                  className={`p-6 rounded-lg border transition-all duration-300 ${
+                  className={`p-6 rounded-lg border-2 transition-all duration-300 hover-glow ${
                     isDark
                       ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20 hover:border-[#009EDB]/50'
                       : 'bg-white border-[#009EDB]/10 hover:border-[#009EDB]/40'
                   }`}
                 >
-                  {/* Step number */}
-                  <div className={`font-mono text-xs mb-4 ${isDark ? 'text-[#009EDB]/60' : 'text-[#009EDB]/70'}`}>
-                    {'// '}step_{item.step}
-                  </div>
-
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
                     isDark ? 'bg-[#009EDB]/10' : 'bg-[#009EDB]/5'
                   }`}>
@@ -187,26 +154,18 @@ const LandingPage = ({ onStartQuiz }) => {
         isDark ? 'border-[#009EDB]/10 bg-[#0a0a14]' : 'border-gray-200 bg-white'
       }`}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
-          <div className={`font-mono text-xs mb-4 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
-            {'// '}footer
-          </div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-              <p className={`text-sm theme-transition ${
-                isDark ? 'text-gray-500' : 'text-gray-500'
-              }`}>
-                <span className="font-mono text-[#009EDB]">{'>'}</span>{' '}
-                Data sourced from the{' '}
-                <a
-                  href="https://protocol.un.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#009EDB] hover:underline transition-colors"
-                >
-                  UN Protocol and Liaison Service
-                </a>
-              </p>
-            </div>
+            <p className={`text-sm theme-transition ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+              Data sourced from the{' '}
+              <a
+                href="https://protocol.un.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#009EDB] hover:underline transition-colors"
+              >
+                UN Protocol and Liaison Service
+              </a>
+            </p>
 
             <a
               href="https://github.com/ravjothbrar/Master-the-Member-States"
@@ -219,7 +178,7 @@ const LandingPage = ({ onStartQuiz }) => {
               }`}
             >
               <Github className="w-4 h-4" />
-              <span className="font-mono">git clone</span>
+              <span>View on GitHub</span>
             </a>
           </div>
         </div>
