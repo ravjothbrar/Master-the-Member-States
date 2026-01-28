@@ -75,9 +75,14 @@ const Results = ({ results, quizConfig, onRestart, onHome }) => {
       isDark ? 'bg-[#0f0f1a]' : 'bg-[#fafafa]'
     }`}>
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
+        {/* File header */}
+        <div className={`font-mono text-sm mb-6 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+          <span className={`${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>#</span> results.json
+        </div>
+
         {/* Score Card */}
-        <div className={`rounded-lg p-8 text-center mb-8 border-2 theme-transition ${
-          isDark ? 'bg-[#1a1a2e]/50 border-[#009EDB]/30' : 'bg-white border-[#009EDB]/20'
+        <div className={`rounded-lg p-8 text-center mb-8 border theme-transition ${
+          isDark ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20' : 'bg-white border-[#009EDB]/10'
         }`}>
           <div className={`w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4 ${
             isDark ? 'bg-[#009EDB]/10' : 'bg-[#009EDB]/5'
@@ -92,19 +97,34 @@ const Results = ({ results, quizConfig, onRestart, onHome }) => {
           </h2>
 
           <p className={`text-sm mb-6 font-mono ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            {'>>'} {getScoreMessage()}
+            <span className="text-[#009EDB]">{'>'}</span> status: {getScoreMessage()}
           </p>
 
-          {/* Score Display */}
-          <div className={`rounded-lg p-6 mb-6 border-2 theme-transition ${
+          {/* Score Display - JSON style */}
+          <div className={`rounded-lg p-6 mb-6 border text-left font-mono text-sm theme-transition ${
             isDark ? 'bg-[#0f0f1a] border-[#009EDB]/20' : 'bg-gray-50 border-[#009EDB]/10'
           }`}>
-            <div className={`text-5xl font-bold mb-1 ${getScoreColor()}`}>
-              {score}/{totalQuestions}
+            <div className={`${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{'{'}</div>
+            <div className="pl-4 space-y-1">
+              <div>
+                <span className="text-[#009EDB]">"score"</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>: </span>
+                <span className={`text-2xl font-bold ${getScoreColor()}`}>{score}</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>,</span>
+              </div>
+              <div>
+                <span className="text-[#009EDB]">"total"</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>: </span>
+                <span className={`${isDark ? 'text-white' : 'text-gray-900'}`}>{totalQuestions}</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>,</span>
+              </div>
+              <div>
+                <span className="text-[#009EDB]">"percentage"</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>: </span>
+                <span className={`${getScoreColor()}`}>{percentage}%</span>
+              </div>
             </div>
-            <p className={`text-sm font-mono ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-              {percentage}% correct
-            </p>
+            <div className={`${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{'}'}</div>
           </div>
 
           {/* Action Buttons */}
@@ -114,51 +134,51 @@ const Results = ({ results, quizConfig, onRestart, onHome }) => {
               className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded-lg transition-all duration-300 hover-glow"
             >
               <RotateCcw className="w-4 h-4" />
-              Try Again
+              <span className="font-mono">./retry</span>
             </button>
             <button
               onClick={onHome}
               className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg transition-all duration-300 ${
                 isDark
-                  ? 'bg-[#1a1a2e] border-2 border-[#009EDB]/20 text-gray-300 hover:border-[#009EDB]/50 hover:text-[#009EDB]'
-                  : 'bg-white border-2 border-[#009EDB]/20 text-gray-700 hover:border-[#009EDB]/50 hover:text-[#009EDB]'
+                  ? 'bg-[#0f0f1a] border border-[#009EDB]/20 text-gray-300 hover:border-[#009EDB]/50 hover:text-[#009EDB]'
+                  : 'bg-gray-50 border border-[#009EDB]/20 text-gray-700 hover:border-[#009EDB]/50 hover:text-[#009EDB]'
               }`}
             >
               <Home className="w-4 h-4" />
-              Home
+              <span className="font-mono">cd ~</span>
             </button>
           </div>
         </div>
 
         {/* Answer Review */}
         <div>
-          <div className={`flex items-center gap-3 mb-4 ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
-            <span className="font-mono text-lg font-bold">||</span>
-            <h3 className="text-lg font-bold tracking-wide uppercase">
+          <div className={`font-mono text-sm mb-4 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+            <span className={`${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>##</span> review.md
+          </div>
+
+          <div className={`flex items-center gap-3 mb-6`}>
+            <div className={`h-px flex-1 max-w-[40px] ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
+            <h3 className={`text-lg font-bold tracking-wide uppercase ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
               Answer Review
             </h3>
-            <span className="font-mono text-lg font-bold">||</span>
+            <div className={`h-px flex-1 ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
           </div>
 
           <div className="space-y-2">
             {answers.map((answer, index) => (
               <div
                 key={index}
-                className={`p-4 rounded-lg border-2 transition-all duration-300 ${
+                className={`p-4 rounded-lg border transition-all duration-300 ${
                   answer.isCorrect
-                    ? isDark ? 'bg-green-500/10 border-green-500/30' : 'bg-green-50 border-green-200'
-                    : isDark ? 'bg-red-500/10 border-red-500/30' : 'bg-red-50 border-red-200'
+                    ? isDark ? 'bg-green-500/5 border-green-500/30' : 'bg-green-50 border-green-200'
+                    : isDark ? 'bg-red-500/5 border-red-500/30' : 'bg-red-50 border-red-200'
                 }`}
               >
                 <div className="flex items-start gap-3">
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                    answer.isCorrect ? 'bg-green-500' : 'bg-red-500'
+                  <div className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 font-mono text-xs font-bold ${
+                    answer.isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
                   }`}>
-                    {answer.isCorrect ? (
-                      <CheckCircle className="w-3 h-3 text-white" />
-                    ) : (
-                      <XCircle className="w-3 h-3 text-white" />
-                    )}
+                    {answer.isCorrect ? '✓' : '×'}
                   </div>
 
                   <div className="flex-1 min-w-0">
@@ -175,12 +195,12 @@ const Results = ({ results, quizConfig, onRestart, onHome }) => {
                     </div>
 
                     <p className={`text-xs font-mono theme-transition ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {answer.question.correctAnswer.officialName}
+                      <span className="text-[#009EDB]">official:</span> {answer.question.correctAnswer.officialName}
                     </p>
 
                     {!answer.isCorrect && (
                       <p className="text-xs text-red-500 mt-1 font-mono">
-                        {'>'} Your answer: {answer.question.type === 'flagToName'
+                        <span className="opacity-70">your_answer:</span> {answer.question.type === 'flagToName'
                           ? answer.selectedAnswer.name
                           : answer.selectedAnswer.shortName}
                       </p>
