@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Globe, Moon, Sun, Users, History } from 'lucide-react';
+import { Globe, Moon, Sun, Users, History, HelpCircle } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-const Header = ({ onHomeClick, onHistoryClick, currentView }) => {
+const Header = ({ onHomeClick, onHistoryClick, onWhyClick, currentView }) => {
   const { isDark, toggleTheme } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -63,6 +63,21 @@ const Header = ({ onHomeClick, onHistoryClick, currentView }) => {
 
           {/* Navigation */}
           <div className="flex items-center gap-2">
+            {/* Why Tab */}
+            <button
+              onClick={onWhyClick}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                currentView === 'why'
+                  ? 'bg-[#009EDB] text-white'
+                  : isDark
+                    ? 'text-gray-400 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
+                    : 'text-gray-600 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
+              }`}
+            >
+              <HelpCircle className="w-4 h-4" />
+              <span className="hidden sm:inline">Why?</span>
+            </button>
+
             {/* History Tab */}
             <button
               onClick={onHistoryClick}

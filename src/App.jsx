@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import Header from './components/Header';
+import CreatorBanner from './components/CreatorBanner';
 import LandingPage from './components/LandingPage';
 import QuizConfig from './components/QuizConfig';
 import Quiz from './components/Quiz';
 import Results from './components/Results';
 import ResultsHistory from './components/ResultsHistory';
+import WhyPage from './components/WhyPage';
 import { generateQuestions } from './data/memberStates';
 import { useTheme } from './context/ThemeContext';
 
@@ -15,6 +17,7 @@ const VIEWS = {
   QUIZ: 'quiz',
   RESULTS: 'results',
   HISTORY: 'history',
+  WHY: 'why',
 };
 
 function App() {
@@ -61,11 +64,17 @@ function App() {
     setCurrentView(VIEWS.HISTORY);
   };
 
+  const handleViewWhy = () => {
+    setCurrentView(VIEWS.WHY);
+  };
+
   return (
     <div className={`min-h-screen theme-transition ${isDark ? 'bg-[#0f0f1a]' : 'bg-[#fafafa]'}`}>
+      <CreatorBanner />
       <Header
         onHomeClick={handleGoHome}
         onHistoryClick={handleViewHistory}
+        onWhyClick={handleViewWhy}
         currentView={currentView}
       />
 
@@ -92,6 +101,10 @@ function App() {
 
       {currentView === VIEWS.HISTORY && (
         <ResultsHistory onBack={handleGoHome} />
+      )}
+
+      {currentView === VIEWS.WHY && (
+        <WhyPage onBack={handleGoHome} />
       )}
     </div>
   );

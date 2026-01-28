@@ -34,9 +34,9 @@ const ResultsHistory = ({ onBack }) => {
 
   const getModeLabel = (mode) => {
     switch (mode) {
-      case 'flagToName': return 'Flag → Name';
-      case 'nameToFlag': return 'Name → Flag';
-      case 'mixed': return 'Mixed';
+      case 'flagToName': return 'flag→name';
+      case 'nameToFlag': return 'name→flag';
+      case 'mixed': return 'mixed';
       default: return mode;
     }
   };
@@ -69,131 +69,138 @@ const ResultsHistory = ({ onBack }) => {
         {/* Back Button */}
         <button
           onClick={onBack}
-          className={`flex items-center gap-2 text-sm font-medium px-3 py-2 -ml-3 rounded-lg transition-all duration-300 mb-8 ${
+          className={`inline-flex items-center gap-2 mb-8 text-sm font-medium transition-all duration-300 px-3 py-1.5 -ml-3 rounded ${
             isDark
               ? 'text-gray-400 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
-              : 'text-gray-600 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
+              : 'text-gray-600 hover:text-[#009EDB] hover:bg-[#009EDB]/5'
           }`}
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Home
+          <span className="font-mono">{'<'} back</span>
         </button>
+
+        {/* File header */}
+        <div className={`font-mono text-sm mb-6 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+          <span className={`${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>#</span> history.log
+        </div>
 
         {/* Title */}
         <div className="flex items-center justify-between mb-8">
-          <div className={`flex items-center gap-3 ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
-            <span className="font-mono text-lg font-bold">||</span>
-            <h1 className={`text-2xl font-bold tracking-wide theme-transition ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
+          <div className={`flex items-center gap-3`}>
+            <div className={`h-px flex-1 max-w-[40px] ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
+            <h1 className={`text-xl font-bold tracking-wide uppercase ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
               Quiz History
             </h1>
-            <span className="font-mono text-lg font-bold">||</span>
+            <div className={`h-px w-[40px] ${isDark ? 'bg-[#009EDB]/30' : 'bg-[#009EDB]/20'}`}></div>
           </div>
 
           {history.length > 0 && (
             <button
               onClick={clearHistory}
-              className={`flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition-all duration-300 ${
+              className={`flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded transition-all duration-300 ${
                 isDark
                   ? 'text-red-400 hover:bg-red-500/10'
                   : 'text-red-500 hover:bg-red-50'
               }`}
             >
-              <Trash2 className="w-4 h-4" />
-              Clear All
+              <Trash2 className="w-3 h-3" />
+              rm -rf ./history
             </button>
           )}
         </div>
 
         {/* Stats Overview */}
         {history.length > 0 && (
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className={`p-4 rounded-lg border-2 text-center theme-transition ${
-              isDark
-                ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20'
-                : 'bg-white border-[#009EDB]/10'
-            }`}>
-              <Target className="w-5 h-5 text-[#009EDB] mx-auto mb-2" />
-              <p className={`text-2xl font-bold theme-transition ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {totalQuizzes}
-              </p>
-              <p className={`text-xs theme-transition ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                Quizzes Taken
-              </p>
+          <div className={`p-4 rounded-lg border mb-8 font-mono text-sm ${
+            isDark ? 'bg-[#1a1a2e]/30 border-[#009EDB]/20' : 'bg-white border-[#009EDB]/10'
+          }`}>
+            <div className={`text-xs mb-3 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+              {'// '}stats
             </div>
-            <div className={`p-4 rounded-lg border-2 text-center theme-transition ${
-              isDark
-                ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20'
-                : 'bg-white border-[#009EDB]/10'
-            }`}>
-              <Clock className="w-5 h-5 text-[#009EDB] mx-auto mb-2" />
-              <p className={`text-2xl font-bold theme-transition ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {averageScore}%
-              </p>
-              <p className={`text-xs theme-transition ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                Average Score
-              </p>
-            </div>
-            <div className={`p-4 rounded-lg border-2 text-center theme-transition ${
-              isDark
-                ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20'
-                : 'bg-white border-[#009EDB]/10'
-            }`}>
-              <Trophy className="w-5 h-5 text-[#009EDB] mx-auto mb-2" />
-              <p className={`text-2xl font-bold theme-transition ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {bestScore}%
-              </p>
-              <p className={`text-xs theme-transition ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                Best Score
-              </p>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {totalQuizzes}
+                </div>
+                <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                  <Target className="w-3 h-3 inline mr-1 text-[#009EDB]" />
+                  total
+                </div>
+              </div>
+              <div className="text-center">
+                <div className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {averageScore}%
+                </div>
+                <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                  <Clock className="w-3 h-3 inline mr-1 text-[#009EDB]" />
+                  average
+                </div>
+              </div>
+              <div className="text-center">
+                <div className={`text-2xl font-bold ${getScoreColor(bestScore)}`}>
+                  {bestScore}%
+                </div>
+                <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                  <Trophy className="w-3 h-3 inline mr-1 text-[#009EDB]" />
+                  best
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {/* History List */}
         {history.length === 0 ? (
-          <div className={`text-center py-16 rounded-lg border-2 theme-transition ${
+          <div className={`text-center py-16 rounded-lg border theme-transition ${
             isDark
-              ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20'
+              ? 'bg-[#1a1a2e]/30 border-[#009EDB]/20'
               : 'bg-white border-[#009EDB]/10'
           }`}>
+            <div className={`font-mono text-sm mb-4 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
+              {'// '}empty
+            </div>
             <Trophy className={`w-12 h-12 mx-auto mb-4 ${isDark ? 'text-gray-600' : 'text-gray-300'}`} />
-            <p className={`text-lg font-medium mb-2 theme-transition ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-              No quiz history yet
+            <p className={`font-mono text-sm theme-transition ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+              <span className="text-[#009EDB]">{'>'}</span> No quiz history yet
             </p>
-            <p className={`text-sm theme-transition ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+            <p className={`text-xs mt-2 theme-transition ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
               Complete a quiz to see your results here
             </p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-2">
+            <div className={`font-mono text-xs mb-3 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+              {'// '}entries: {history.length}
+            </div>
             {history.map((result, index) => (
               <div
                 key={index}
-                className={`p-4 rounded-lg border-2 transition-all duration-300 hover-glow ${
+                className={`p-4 rounded-lg border transition-all duration-300 ${
                   isDark
-                    ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20 hover:border-[#009EDB]/50'
+                    ? 'bg-[#1a1a2e]/30 border-[#009EDB]/20 hover:border-[#009EDB]/50'
                     : 'bg-white border-[#009EDB]/10 hover:border-[#009EDB]/40'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`w-14 h-14 rounded-lg flex items-center justify-center ${
-                      isDark ? 'bg-[#009EDB]/10' : 'bg-[#009EDB]/5'
+                    <div className={`w-14 h-14 rounded-lg flex items-center justify-center font-mono ${
+                      isDark ? 'bg-[#0f0f1a] border border-[#009EDB]/20' : 'bg-gray-50 border border-[#009EDB]/10'
                     }`}>
                       <span className={`text-xl font-bold ${getScoreColor(result.percentage)}`}>
                         {result.percentage}%
                       </span>
                     </div>
                     <div>
-                      <p className={`font-medium theme-transition ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                        <span className="text-[#009EDB] font-mono mr-2">{'>>'}</span>
-                        {result.score}/{result.totalQuestions} correct
+                      <p className={`font-medium font-mono theme-transition ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        <span className="text-[#009EDB] opacity-70">[</span>
+                        {result.score}/{result.totalQuestions}
+                        <span className="text-[#009EDB] opacity-70">]</span>
+                        <span className={`ml-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>correct</span>
                       </p>
-                      <div className={`flex items-center gap-3 text-sm theme-transition ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                        <span className="font-mono">{getModeLabel(result.mode)}</span>
-                        <span>•</span>
+                      <div className={`flex items-center gap-3 text-xs font-mono theme-transition ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                        <span className={`px-1.5 py-0.5 rounded ${isDark ? 'bg-[#009EDB]/10 text-[#009EDB]' : 'bg-[#009EDB]/5 text-[#009EDB]'}`}>
+                          {getModeLabel(result.mode)}
+                        </span>
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
                           {formatDate(result.date)}
