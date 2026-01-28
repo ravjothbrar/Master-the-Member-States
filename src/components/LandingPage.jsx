@@ -1,6 +1,37 @@
 import { ArrowRight, Github, Flag, CheckCircle, BarChart3 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
+// UN Logo ASCII Art Component
+const UNAsciiLogo = () => {
+  const asciiArt = `
+        ██╗   ██╗███╗   ██╗
+        ██║   ██║████╗  ██║
+        ██║   ██║██╔██╗ ██║
+        ██║   ██║██║╚██╗██║
+        ╚██████╔╝██║ ╚████║
+         ╚═════╝ ╚═╝  ╚═══╝
+    ┌─────────────────────────┐
+    │    ╭───────────────╮    │
+    │  ╭─┤   ▄▄█████▄▄   ├─╮  │
+    │ ╱  │ ▄██░░░░░░░██▄ │  ╲ │
+    │╱   │██░░▄▄▄▄▄▄▄░░██│   ╲│
+    │    │█░░█████████░░█│    │
+    │╲   │██░░▀▀▀▀▀▀▀░░██│   ╱│
+    │ ╲  │ ▀██░░░░░░░██▀ │  ╱ │
+    │  ╰─┤   ▀▀█████▀▀   ├─╯  │
+    │    ╰───────────────╯    │
+    └─────────────────────────┘
+  `.trim();
+
+  return (
+    <div className="ascii-art-container rounded-lg p-4 cursor-pointer select-none">
+      <pre className="ascii-art-glow text-[#009EDB] text-[0.45rem] sm:text-[0.55rem] md:text-xs leading-tight font-mono whitespace-pre">
+        {asciiArt}
+      </pre>
+    </div>
+  );
+};
+
 const LandingPage = ({ onStartQuiz }) => {
   const { isDark } = useTheme();
 
@@ -11,36 +42,44 @@ const LandingPage = ({ onStartQuiz }) => {
       {/* Hero Section */}
       <section className="page-transition">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-24">
-          <div className="max-w-3xl">
-            <div className={`font-mono text-sm mb-4 theme-transition ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
-              // Model United Nations Study Tool
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+            {/* Left side - Text content */}
+            <div className="flex-1 max-w-2xl">
+              <div className={`font-mono text-sm mb-4 theme-transition ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
+                // Model United Nations Study Tool
+              </div>
+
+              <h1 className={`text-4xl md:text-5xl lg:text-5xl font-bold leading-[1.1] mb-6 theme-transition ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>
+                Learn the Official Names of{' '}
+                <span className="text-[#009EDB] relative inline-block">
+                  UN Member States
+                  <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-[#009EDB] to-transparent"></span>
+                </span>
+              </h1>
+
+              <p className={`text-lg mb-8 leading-relaxed theme-transition ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                An interactive quiz tool for Model UN delegates to master the official nomenclature
+                used by the UN Protocol and Liaison Service.
+              </p>
+
+              <button
+                onClick={onStartQuiz}
+                className="group inline-flex items-center gap-3 px-6 py-3.5 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded-lg transition-all duration-300 hover-glow"
+              >
+                <span className="font-mono text-sm opacity-80">{'>>'}</span>
+                <span>Start Quiz</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
             </div>
 
-            <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 theme-transition ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
-              Learn the Official Names of{' '}
-              <span className="text-[#009EDB] relative inline-block">
-                UN Member States
-                <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-[#009EDB] to-transparent"></span>
-              </span>
-            </h1>
-
-            <p className={`text-lg mb-8 leading-relaxed theme-transition ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              An interactive quiz tool for Model UN delegates to master the official nomenclature
-              used by the UN Protocol and Liaison Service.
-            </p>
-
-            <button
-              onClick={onStartQuiz}
-              className="group inline-flex items-center gap-3 px-6 py-3.5 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded-lg transition-all duration-300 hover-glow"
-            >
-              <span className="font-mono text-sm opacity-80">{'>>'}</span>
-              <span>Start Quiz</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+            {/* Right side - ASCII Art Logo */}
+            <div className="hidden md:flex flex-shrink-0">
+              <UNAsciiLogo />
+            </div>
           </div>
         </div>
       </section>
