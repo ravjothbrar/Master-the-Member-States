@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { ChevronRight, Check, X, Flag, Type } from 'lucide-react';
 import FlagImage from './FlagImage';
+import { useTheme } from '../context/ThemeContext';
 
 const Quiz = ({ questions, onComplete }) => {
+  const { isDark } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -18,7 +20,6 @@ const Quiz = ({ questions, onComplete }) => {
     setSelectedAnswer({ option, index: optionIndex });
     setIsAnswered(true);
 
-    // For flagToName, check if option.isCorrect; for nameToFlag, check code match
     const isCorrect = currentQuestion.type === 'flagToName'
       ? option.isCorrect
       : option.code === currentQuestion.correctAnswer.code;
@@ -49,10 +50,14 @@ const Quiz = ({ questions, onComplete }) => {
   };
 
   const getOptionClass = (option, index) => {
-    const baseClass = 'w-full p-4 rounded-xl border-2 text-left transition-all duration-300 ease-out flex items-center gap-3 transform';
+    const baseClass = 'w-full p-4 rounded text-left transition-all duration-200 flex items-center gap-3';
 
     if (!isAnswered) {
-      return `${baseClass} border-gray-200 hover:border-[#009EDB] hover:bg-[#009EDB]/5 hover:scale-[1.02] hover:shadow-md cursor-pointer active:scale-[0.98]`;
+      return `${baseClass} ${
+        isDark
+          ? 'bg-[#1a1a2e] border border-[#009EDB]/20 hover:border-[#009EDB] hover:bg-[#252542]'
+          : 'bg-gray-50 border border-gray-200 hover:border-[#009EDB] hover:bg-[#009EDB]/5'
+      } cursor-pointer`;
     }
 
     // For flagToName questions
@@ -61,12 +66,12 @@ const Quiz = ({ questions, onComplete }) => {
       const isSelected = selectedAnswer?.index === index;
 
       if (isCorrect) {
-        return `${baseClass} border-green-500 bg-green-50 animate-pulse-correct scale-[1.02]`;
+        return `${baseClass} border-2 border-green-500 ${isDark ? 'bg-green-500/10' : 'bg-green-50'}`;
       }
       if (isSelected && !isCorrect) {
-        return `${baseClass} border-red-500 bg-red-50 animate-shake`;
+        return `${baseClass} border-2 border-red-500 ${isDark ? 'bg-red-500/10' : 'bg-red-50'} animate-shake`;
       }
-      return `${baseClass} border-gray-200 opacity-50`;
+      return `${baseClass} ${isDark ? 'bg-[#1a1a2e] border border-[#009EDB]/10' : 'bg-gray-50 border border-gray-200'} opacity-50`;
     }
 
     // For nameToFlag questions
@@ -74,52 +79,56 @@ const Quiz = ({ questions, onComplete }) => {
     const isSelected = selectedAnswer?.option?.code === option.code;
 
     if (isCorrect) {
-      return `${baseClass} border-green-500 bg-green-50 animate-pulse-correct scale-[1.02]`;
+      return `${baseClass} border-2 border-green-500 ${isDark ? 'bg-green-500/10' : 'bg-green-50'}`;
     }
     if (isSelected && !isCorrect) {
-      return `${baseClass} border-red-500 bg-red-50 animate-shake`;
+      return `${baseClass} border-2 border-red-500 ${isDark ? 'bg-red-500/10' : 'bg-red-50'} animate-shake`;
     }
-    return `${baseClass} border-gray-200 opacity-50`;
+    return `${baseClass} ${isDark ? 'bg-[#1a1a2e] border border-[#009EDB]/10' : 'bg-gray-50 border border-gray-200'} opacity-50`;
   };
 
   return (
-    <div className="min-h-[calc(100vh-88px)] bg-gradient-to-b from-white to-[#E6F4FA] py-6 md:py-8">
-      <div className="max-w-2xl mx-auto px-4">
+    <div className={`min-h-[calc(100vh-64px)] transition-colors duration-300 ${
+      isDark ? 'bg-[#0f0f1a]' : 'bg-white'
+    }`}>
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
         {/* Progress Bar */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-gray-600">
+            <span className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Question {currentIndex + 1} of {questions.length}
             </span>
             <span className="text-sm font-medium text-[#009EDB]">
               Score: {score}/{currentIndex + (isAnswered ? 1 : 0)}
             </span>
           </div>
-          <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+          <div className={`h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-[#1a1a2e]' : 'bg-gray-200'}`}>
             <div
-              className="h-full bg-gradient-to-r from-[#009EDB] to-[#0077B3] transition-all duration-700 ease-out rounded-full"
+              className="h-full bg-[#009EDB] transition-all duration-500 ease-out rounded-full"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
         {/* Question Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 transition-all duration-300">
+        <div className={`rounded-lg p-6 md:p-8 transition-colors duration-300 ${
+          isDark ? 'bg-[#1a1a2e] border border-[#009EDB]/20' : 'bg-gray-50 border border-gray-200'
+        }`}>
           {/* Question Type Badge */}
           <div className="flex items-center gap-2 mb-4">
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 ${
+            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium ${
               currentQuestion.type === 'flagToName'
-                ? 'bg-blue-100 text-blue-700'
-                : 'bg-purple-100 text-purple-700'
+                ? isDark ? 'bg-[#009EDB]/20 text-[#009EDB]' : 'bg-[#009EDB]/10 text-[#009EDB]'
+                : isDark ? 'bg-purple-500/20 text-purple-400' : 'bg-purple-100 text-purple-700'
             }`}>
               {currentQuestion.type === 'flagToName' ? (
                 <>
-                  <Flag className="w-3.5 h-3.5" />
+                  <Flag className="w-3 h-3" />
                   Flag to Name
                 </>
               ) : (
                 <>
-                  <Type className="w-3.5 h-3.5" />
+                  <Type className="w-3 h-3" />
                   Name to Flag
                 </>
               )}
@@ -129,31 +138,33 @@ const Quiz = ({ questions, onComplete }) => {
           {/* Question Content */}
           {currentQuestion.type === 'flagToName' ? (
             <>
-              <p className="text-gray-700 mb-4 text-lg">
-                What is the <strong className="text-[#009EDB]">official UN name</strong> of this member state?
+              <p className={`mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                What is the <span className="text-[#009EDB] font-medium">official UN name</span> of this member state?
               </p>
               <div className="flex justify-center mb-6">
                 <FlagImage
                   code={currentQuestion.correctAnswer.code}
                   size="w320"
                   alt="Flag"
-                  className="w-48 md:w-64 h-auto rounded-lg flag-shadow transition-transform duration-300 hover:scale-105"
+                  className="w-48 md:w-56 h-auto rounded flag-shadow"
                 />
               </div>
             </>
           ) : (
             <>
-              <p className="text-gray-700 mb-2 text-lg">
+              <p className={`mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 Which flag belongs to this member state?
               </p>
-              <p className="text-xl md:text-2xl font-bold text-gray-900 mb-6 text-center py-4 px-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200">
+              <p className={`text-lg md:text-xl font-semibold mb-6 text-center py-4 px-6 rounded ${
+                isDark ? 'bg-[#0f0f1a] text-white' : 'bg-white text-gray-900 border border-gray-200'
+              }`}>
                 {currentQuestion.correctAnswer.officialName}
               </p>
             </>
           )}
 
           {/* Answer Options */}
-          <div className="space-y-3">
+          <div className="space-y-2">
             {currentQuestion.options.map((option, index) => (
               <button
                 key={index}
@@ -163,10 +174,12 @@ const Quiz = ({ questions, onComplete }) => {
               >
                 {currentQuestion.type === 'flagToName' ? (
                   <>
-                    <span className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-sm font-bold text-gray-600 shadow-sm">
+                    <span className={`w-7 h-7 rounded flex items-center justify-center text-xs font-bold ${
+                      isDark ? 'bg-[#009EDB]/10 text-[#009EDB]' : 'bg-[#009EDB]/5 text-[#009EDB]'
+                    }`}>
                       {String.fromCharCode(65 + index)}
                     </span>
-                    <span className="flex-1 text-sm md:text-base font-medium text-gray-800">
+                    <span className={`flex-1 text-sm font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       {option.name}
                     </span>
                     {isAnswered && option.isCorrect && (
@@ -178,14 +191,16 @@ const Quiz = ({ questions, onComplete }) => {
                   </>
                 ) : (
                   <>
-                    <span className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-sm font-bold text-gray-600 shadow-sm">
+                    <span className={`w-7 h-7 rounded flex items-center justify-center text-xs font-bold ${
+                      isDark ? 'bg-[#009EDB]/10 text-[#009EDB]' : 'bg-[#009EDB]/5 text-[#009EDB]'
+                    }`}>
                       {String.fromCharCode(65 + index)}
                     </span>
                     <FlagImage
                       code={option.code}
                       size="w80"
                       alt={`Option ${String.fromCharCode(65 + index)}`}
-                      className="w-14 h-9 object-cover rounded-md flag-shadow"
+                      className="w-12 h-8 object-cover rounded flag-shadow"
                     />
                     <span className="flex-1" />
                     {isAnswered && option.code === currentQuestion.correctAnswer.code && (
@@ -202,23 +217,23 @@ const Quiz = ({ questions, onComplete }) => {
 
           {/* Next Button */}
           {isAnswered && (
-            <div className="mt-6 flex flex-col items-center animate-fade-in">
+            <div className="mt-6 flex flex-col items-center">
               {currentQuestion.type === 'flagToName' && !selectedAnswer?.option?.isCorrect && (
-                <p className="text-sm text-gray-600 mb-3 text-center">
-                  Correct answer: <strong className="text-green-600">{currentQuestion.correctAnswer.officialName}</strong>
+                <p className={`text-sm mb-3 text-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Correct: <span className="text-green-500 font-medium">{currentQuestion.correctAnswer.officialName}</span>
                 </p>
               )}
               {currentQuestion.type === 'nameToFlag' && selectedAnswer?.option?.code !== currentQuestion.correctAnswer.code && (
-                <p className="text-sm text-gray-600 mb-3 text-center">
-                  The correct flag was for <strong className="text-green-600">{currentQuestion.correctAnswer.shortName}</strong>
+                <p className={`text-sm mb-3 text-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Correct flag: <span className="text-green-500 font-medium">{currentQuestion.correctAnswer.shortName}</span>
                 </p>
               )}
               <button
                 onClick={handleNext}
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#009EDB] to-[#0077B3] hover:from-[#0077B3] hover:to-[#005A8C] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded transition-all duration-200"
               >
                 {currentIndex + 1 >= questions.length ? 'See Results' : 'Next Question'}
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           )}
