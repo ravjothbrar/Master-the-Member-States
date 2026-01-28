@@ -5,6 +5,7 @@
   --un-blue: #009EDB;
   --un-blue-dark: #0077B3;
   --un-blue-light: #E6F4FA;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Smooth scrolling for the entire page */
@@ -16,34 +17,64 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
-/* Custom scrollbar */
+/* Dark mode base styles */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: #0f0f1a;
+  color: #e5e7eb;
+}
+
+/* Monospace font for terminal aesthetic */
+.font-mono {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', ui-monospace, monospace;
+}
+
+/* Custom scrollbar - Light mode */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--un-blue);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--un-blue-dark);
 }
 
-/* Flag image styling */
-.flag-shadow {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+/* Custom scrollbar - Dark mode */
+.dark ::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Smooth transitions */
-.transition-all-smooth {
-  transition: all 0.3s ease-in-out;
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--un-blue);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--un-blue-dark);
+}
+
+/* Flag image styling */
+.flag-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Global smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Answer option animations */
@@ -71,7 +102,7 @@ body {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -80,14 +111,14 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 /* Slide up animation */
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -96,14 +127,14 @@ body {
 }
 
 .animate-slide-up {
-  animation: slideUp 0.5s ease-out forwards;
+  animation: slideUp 0.6s ease-out forwards;
 }
 
 /* Scale in animation */
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
@@ -112,7 +143,7 @@ body {
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.3s ease-out forwards;
+  animation: scaleIn 0.4s ease-out forwards;
 }
 
 /* Button press effect */
@@ -131,12 +162,49 @@ button:focus-visible, a:focus-visible {
   outline-offset: 2px;
 }
 
-/* Card hover effect */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Terminal-style decorators */
+.terminal-line::before {
+  content: '>';
+  color: var(--un-blue);
+  margin-right: 0.5rem;
+  font-weight: bold;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+.terminal-line-double::before {
+  content: '>>';
+  color: var(--un-blue);
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+/* Section dividers with accent */
+.section-divider {
+  height: 3px;
+  background: linear-gradient(90deg, var(--un-blue), transparent);
+}
+
+/* Blue accent border */
+.accent-border-left {
+  border-left: 3px solid var(--un-blue);
+  padding-left: 1rem;
+}
+
+/* Hover glow effect */
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 158, 219, 0.2);
+}
+
+/* Dark mode hover glow */
+.dark .hover-glow:hover {
+  box-shadow: 0 0 25px rgba(0, 158, 219, 0.3);
+}
+
+/* Page transition wrapper */
+.page-transition {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Smooth color transitions for theme switching */
+.theme-transition {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
