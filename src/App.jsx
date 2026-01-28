@@ -4,7 +4,9 @@ import LandingPage from './components/LandingPage';
 import QuizConfig from './components/QuizConfig';
 import Quiz from './components/Quiz';
 import Results from './components/Results';
+import ResultsHistory from './components/ResultsHistory';
 import { generateQuestions } from './data/memberStates';
+import { useTheme } from './context/ThemeContext';
 
 // App states
 const VIEWS = {
@@ -12,9 +14,11 @@ const VIEWS = {
   CONFIG: 'config',
   QUIZ: 'quiz',
   RESULTS: 'results',
+  HISTORY: 'history',
 };
 
 function App() {
+  const { isDark } = useTheme();
   const [currentView, setCurrentView] = useState(VIEWS.LANDING);
   const [quizConfig, setQuizConfig] = useState(null);
   const [questions, setQuestions] = useState([]);
@@ -53,9 +57,17 @@ function App() {
     setResults(null);
   };
 
+  const handleViewHistory = () => {
+    setCurrentView(VIEWS.HISTORY);
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header onHomeClick={handleGoHome} />
+    <div className={`min-h-screen theme-transition ${isDark ? 'bg-[#0f0f1a]' : 'bg-[#fafafa]'}`}>
+      <Header
+        onHomeClick={handleGoHome}
+        onHistoryClick={handleViewHistory}
+        currentView={currentView}
+      />
 
       {currentView === VIEWS.LANDING && (
         <LandingPage onStartQuiz={handleStartQuizConfig} />
@@ -70,7 +82,16 @@ function App() {
       )}
 
       {currentView === VIEWS.RESULTS && results && (
-        <Results results={results} onRestart={handleRestart} onHome={handleGoHome} />
+        <Results
+          results={results}
+          quizConfig={quizConfig}
+          onRestart={handleRestart}
+          onHome={handleGoHome}
+        />
+      )}
+
+      {currentView === VIEWS.HISTORY && (
+        <ResultsHistory onBack={handleGoHome} />
       )}
     </div>
   );

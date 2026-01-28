@@ -29,15 +29,17 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
   ];
 
   return (
-    <div className={`min-h-[calc(100vh-64px)] transition-colors duration-300 ${
-      isDark ? 'bg-[#0f0f1a]' : 'bg-white'
+    <div className={`min-h-[calc(100vh-64px)] theme-transition page-transition ${
+      isDark ? 'bg-[#0f0f1a]' : 'bg-[#fafafa]'
     }`}>
       <div className="max-w-xl mx-auto px-4 sm:px-6 py-12">
         {/* Back Button */}
         <button
           onClick={onBack}
-          className={`flex items-center gap-2 text-sm transition-colors mb-8 ${
-            isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+          className={`flex items-center gap-2 text-sm font-medium px-3 py-2 -ml-3 rounded-lg transition-all duration-300 mb-8 ${
+            isDark
+              ? 'text-gray-400 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
+              : 'text-gray-600 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
           }`}
         >
           <ArrowLeft className="w-4 h-4" />
@@ -45,17 +47,22 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
         </button>
 
         {/* Title */}
-        <h1 className={`text-2xl font-bold mb-8 transition-colors duration-300 ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}>
-          Configure Quiz
-        </h1>
+        <div className={`flex items-center gap-3 mb-8 ${isDark ? 'text-[#009EDB]' : 'text-[#009EDB]'}`}>
+          <span className="font-mono text-lg font-bold">||</span>
+          <h1 className={`text-2xl font-bold tracking-wide theme-transition ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>
+            Configure Quiz
+          </h1>
+          <span className="font-mono text-lg font-bold">||</span>
+        </div>
 
         {/* Question Count */}
         <div className="mb-8">
-          <label className={`block text-sm font-medium mb-3 ${
+          <label className={`block text-sm font-medium mb-3 theme-transition ${
             isDark ? 'text-gray-300' : 'text-gray-700'
           }`}>
+            <span className="text-[#009EDB] font-mono mr-2">{'>'}</span>
             Number of Questions
           </label>
           <div className="grid grid-cols-4 gap-2">
@@ -63,12 +70,12 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
               <button
                 key={option.value}
                 onClick={() => setQuestionCount(option.value)}
-                className={`relative px-4 py-3 rounded text-sm font-medium transition-all duration-200 ${
+                className={`relative px-4 py-3 rounded text-sm font-medium transition-all duration-300 ${
                   questionCount === option.value
-                    ? 'bg-[#009EDB] text-white'
+                    ? 'bg-[#009EDB] text-white hover-glow'
                     : isDark
-                      ? 'bg-[#1a1a2e] text-gray-300 hover:bg-[#252542] border border-[#009EDB]/20'
-                      : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'
+                      ? 'bg-[#1a1a2e] text-gray-300 hover:bg-[#252542] border border-[#009EDB]/20 hover:border-[#009EDB]/50'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-[#009EDB]/20 hover:border-[#009EDB]/50'
                 }`}
               >
                 {option.label}
@@ -80,7 +87,7 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
               </button>
             ))}
           </div>
-          <p className={`text-xs mt-2 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+          <p className={`text-xs mt-3 font-mono theme-transition ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
             <Star className="w-3 h-3 inline mr-1 text-[#009EDB]" />
             20 questions recommended for balanced practice
           </p>
@@ -88,9 +95,10 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
 
         {/* Quiz Mode */}
         <div className="mb-8">
-          <label className={`block text-sm font-medium mb-3 ${
+          <label className={`block text-sm font-medium mb-3 theme-transition ${
             isDark ? 'text-gray-300' : 'text-gray-700'
           }`}>
+            <span className="text-[#009EDB] font-mono mr-2">{'>'}</span>
             Quiz Mode
           </label>
           <div className="space-y-2">
@@ -101,15 +109,15 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
                 <button
                   key={option.value}
                   onClick={() => setMode(option.value)}
-                  className={`w-full flex items-center gap-4 p-4 rounded text-left transition-all duration-200 ${
+                  className={`w-full flex items-center gap-4 p-4 rounded-lg text-left transition-all duration-300 ${
                     isSelected
-                      ? 'bg-[#009EDB] text-white'
+                      ? 'bg-[#009EDB] text-white hover-glow'
                       : isDark
-                        ? 'bg-[#1a1a2e] hover:bg-[#252542] border border-[#009EDB]/20'
-                        : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
+                        ? 'bg-[#1a1a2e] hover:bg-[#252542] border border-[#009EDB]/20 hover:border-[#009EDB]/50'
+                        : 'bg-white hover:bg-gray-50 border border-[#009EDB]/20 hover:border-[#009EDB]/50'
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded flex items-center justify-center ${
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                     isSelected
                       ? 'bg-white/20'
                       : isDark ? 'bg-[#009EDB]/10' : 'bg-[#009EDB]/5'
@@ -120,13 +128,13 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <p className={`font-medium ${
+                      <p className={`font-medium theme-transition ${
                         isSelected ? 'text-white' : isDark ? 'text-white' : 'text-gray-900'
                       }`}>
                         {option.label}
                       </p>
                       {option.recommended && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${
+                        <span className={`text-xs px-2 py-0.5 rounded font-mono ${
                           isSelected
                             ? 'bg-white/20 text-white'
                             : 'bg-[#009EDB]/10 text-[#009EDB]'
@@ -135,7 +143,7 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
                         </span>
                       )}
                     </div>
-                    <p className={`text-sm ${
+                    <p className={`text-sm theme-transition ${
                       isSelected ? 'text-white/70' : isDark ? 'text-gray-400' : 'text-gray-500'
                     }`}>
                       {option.description}
@@ -150,8 +158,9 @@ const QuizConfig = ({ onStartQuiz, onBack }) => {
         {/* Start Button */}
         <button
           onClick={handleStart}
-          className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded transition-all duration-200"
+          className="group w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded-lg transition-all duration-300 hover-glow"
         >
+          <span className="font-mono">{'>>'}</span>
           <Play className="w-5 h-5" />
           Start Quiz
         </button>

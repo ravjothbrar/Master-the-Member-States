@@ -50,13 +50,13 @@ const Quiz = ({ questions, onComplete }) => {
   };
 
   const getOptionClass = (option, index) => {
-    const baseClass = 'w-full p-4 rounded text-left transition-all duration-200 flex items-center gap-3';
+    const baseClass = 'w-full p-4 rounded-lg text-left transition-all duration-300 flex items-center gap-3 border-2';
 
     if (!isAnswered) {
       return `${baseClass} ${
         isDark
-          ? 'bg-[#1a1a2e] border border-[#009EDB]/20 hover:border-[#009EDB] hover:bg-[#252542]'
-          : 'bg-gray-50 border border-gray-200 hover:border-[#009EDB] hover:bg-[#009EDB]/5'
+          ? 'bg-[#1a1a2e]/50 border-[#009EDB]/20 hover:border-[#009EDB]/60 hover:bg-[#252542]'
+          : 'bg-white border-[#009EDB]/10 hover:border-[#009EDB]/50 hover:bg-[#009EDB]/5'
       } cursor-pointer`;
     }
 
@@ -66,12 +66,12 @@ const Quiz = ({ questions, onComplete }) => {
       const isSelected = selectedAnswer?.index === index;
 
       if (isCorrect) {
-        return `${baseClass} border-2 border-green-500 ${isDark ? 'bg-green-500/10' : 'bg-green-50'}`;
+        return `${baseClass} border-green-500 ${isDark ? 'bg-green-500/10' : 'bg-green-50'}`;
       }
       if (isSelected && !isCorrect) {
-        return `${baseClass} border-2 border-red-500 ${isDark ? 'bg-red-500/10' : 'bg-red-50'} animate-shake`;
+        return `${baseClass} border-red-500 ${isDark ? 'bg-red-500/10' : 'bg-red-50'} animate-shake`;
       }
-      return `${baseClass} ${isDark ? 'bg-[#1a1a2e] border border-[#009EDB]/10' : 'bg-gray-50 border border-gray-200'} opacity-50`;
+      return `${baseClass} ${isDark ? 'bg-[#1a1a2e]/30 border-[#009EDB]/10' : 'bg-gray-50 border-gray-200'} opacity-50`;
     }
 
     // For nameToFlag questions
@@ -79,30 +79,30 @@ const Quiz = ({ questions, onComplete }) => {
     const isSelected = selectedAnswer?.option?.code === option.code;
 
     if (isCorrect) {
-      return `${baseClass} border-2 border-green-500 ${isDark ? 'bg-green-500/10' : 'bg-green-50'}`;
+      return `${baseClass} border-green-500 ${isDark ? 'bg-green-500/10' : 'bg-green-50'}`;
     }
     if (isSelected && !isCorrect) {
-      return `${baseClass} border-2 border-red-500 ${isDark ? 'bg-red-500/10' : 'bg-red-50'} animate-shake`;
+      return `${baseClass} border-red-500 ${isDark ? 'bg-red-500/10' : 'bg-red-50'} animate-shake`;
     }
-    return `${baseClass} ${isDark ? 'bg-[#1a1a2e] border border-[#009EDB]/10' : 'bg-gray-50 border border-gray-200'} opacity-50`;
+    return `${baseClass} ${isDark ? 'bg-[#1a1a2e]/30 border-[#009EDB]/10' : 'bg-gray-50 border-gray-200'} opacity-50`;
   };
 
   return (
-    <div className={`min-h-[calc(100vh-64px)] transition-colors duration-300 ${
-      isDark ? 'bg-[#0f0f1a]' : 'bg-white'
+    <div className={`min-h-[calc(100vh-64px)] theme-transition page-transition ${
+      isDark ? 'bg-[#0f0f1a]' : 'bg-[#fafafa]'
     }`}>
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
         {/* Progress Bar */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
-            <span className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Question {currentIndex + 1} of {questions.length}
+            <span className={`text-sm font-mono theme-transition ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              <span className="text-[#009EDB]">{'>'}</span> Question {currentIndex + 1} of {questions.length}
             </span>
-            <span className="text-sm font-medium text-[#009EDB]">
+            <span className="text-sm font-mono text-[#009EDB]">
               Score: {score}/{currentIndex + (isAnswered ? 1 : 0)}
             </span>
           </div>
-          <div className={`h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-[#1a1a2e]' : 'bg-gray-200'}`}>
+          <div className={`h-2 rounded-full overflow-hidden ${isDark ? 'bg-[#1a1a2e]' : 'bg-gray-200'}`}>
             <div
               className="h-full bg-[#009EDB] transition-all duration-500 ease-out rounded-full"
               style={{ width: `${progress}%` }}
@@ -111,12 +111,12 @@ const Quiz = ({ questions, onComplete }) => {
         </div>
 
         {/* Question Card */}
-        <div className={`rounded-lg p-6 md:p-8 transition-colors duration-300 ${
-          isDark ? 'bg-[#1a1a2e] border border-[#009EDB]/20' : 'bg-gray-50 border border-gray-200'
+        <div className={`rounded-lg p-6 md:p-8 border-2 theme-transition ${
+          isDark ? 'bg-[#1a1a2e]/50 border-[#009EDB]/30' : 'bg-white border-[#009EDB]/20'
         }`}>
           {/* Question Type Badge */}
           <div className="flex items-center gap-2 mb-4">
-            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium ${
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium ${
               currentQuestion.type === 'flagToName'
                 ? isDark ? 'bg-[#009EDB]/20 text-[#009EDB]' : 'bg-[#009EDB]/10 text-[#009EDB]'
                 : isDark ? 'bg-purple-500/20 text-purple-400' : 'bg-purple-100 text-purple-700'
@@ -124,12 +124,12 @@ const Quiz = ({ questions, onComplete }) => {
               {currentQuestion.type === 'flagToName' ? (
                 <>
                   <Flag className="w-3 h-3" />
-                  Flag to Name
+                  Flag → Name
                 </>
               ) : (
                 <>
                   <Type className="w-3 h-3" />
-                  Name to Flag
+                  Name → Flag
                 </>
               )}
             </span>
@@ -138,25 +138,25 @@ const Quiz = ({ questions, onComplete }) => {
           {/* Question Content */}
           {currentQuestion.type === 'flagToName' ? (
             <>
-              <p className={`mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                What is the <span className="text-[#009EDB] font-medium">official UN name</span> of this member state?
+              <p className={`mb-4 theme-transition ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                What is the <span className="text-[#009EDB] font-semibold">official UN name</span> of this member state?
               </p>
               <div className="flex justify-center mb-6">
                 <FlagImage
                   code={currentQuestion.correctAnswer.code}
                   size="w320"
                   alt="Flag"
-                  className="w-48 md:w-56 h-auto rounded flag-shadow"
+                  className="w-48 md:w-56 h-auto rounded-lg flag-shadow"
                 />
               </div>
             </>
           ) : (
             <>
-              <p className={`mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+              <p className={`mb-2 theme-transition ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 Which flag belongs to this member state?
               </p>
-              <p className={`text-lg md:text-xl font-semibold mb-6 text-center py-4 px-6 rounded ${
-                isDark ? 'bg-[#0f0f1a] text-white' : 'bg-white text-gray-900 border border-gray-200'
+              <p className={`text-lg md:text-xl font-semibold mb-6 text-center py-4 px-6 rounded-lg border-2 theme-transition ${
+                isDark ? 'bg-[#0f0f1a] text-white border-[#009EDB]/20' : 'bg-gray-50 text-gray-900 border-[#009EDB]/10'
               }`}>
                 {currentQuestion.correctAnswer.officialName}
               </p>
@@ -174,12 +174,12 @@ const Quiz = ({ questions, onComplete }) => {
               >
                 {currentQuestion.type === 'flagToName' ? (
                   <>
-                    <span className={`w-7 h-7 rounded flex items-center justify-center text-xs font-bold ${
+                    <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-mono ${
                       isDark ? 'bg-[#009EDB]/10 text-[#009EDB]' : 'bg-[#009EDB]/5 text-[#009EDB]'
                     }`}>
                       {String.fromCharCode(65 + index)}
                     </span>
-                    <span className={`flex-1 text-sm font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
+                    <span className={`flex-1 text-sm font-medium theme-transition ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                       {option.name}
                     </span>
                     {isAnswered && option.isCorrect && (
@@ -191,7 +191,7 @@ const Quiz = ({ questions, onComplete }) => {
                   </>
                 ) : (
                   <>
-                    <span className={`w-7 h-7 rounded flex items-center justify-center text-xs font-bold ${
+                    <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-mono ${
                       isDark ? 'bg-[#009EDB]/10 text-[#009EDB]' : 'bg-[#009EDB]/5 text-[#009EDB]'
                     }`}>
                       {String.fromCharCode(65 + index)}
@@ -219,21 +219,22 @@ const Quiz = ({ questions, onComplete }) => {
           {isAnswered && (
             <div className="mt-6 flex flex-col items-center">
               {currentQuestion.type === 'flagToName' && !selectedAnswer?.option?.isCorrect && (
-                <p className={`text-sm mb-3 text-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Correct: <span className="text-green-500 font-medium">{currentQuestion.correctAnswer.officialName}</span>
+                <p className={`text-sm mb-3 text-center font-mono theme-transition ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {'>'} Correct: <span className="text-green-500 font-medium">{currentQuestion.correctAnswer.officialName}</span>
                 </p>
               )}
               {currentQuestion.type === 'nameToFlag' && selectedAnswer?.option?.code !== currentQuestion.correctAnswer.code && (
-                <p className={`text-sm mb-3 text-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Correct flag: <span className="text-green-500 font-medium">{currentQuestion.correctAnswer.shortName}</span>
+                <p className={`text-sm mb-3 text-center font-mono theme-transition ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {'>'} Correct flag: <span className="text-green-500 font-medium">{currentQuestion.correctAnswer.shortName}</span>
                 </p>
               )}
               <button
                 onClick={handleNext}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded transition-all duration-200"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-[#009EDB] hover:bg-[#0077B3] text-white font-medium rounded-lg transition-all duration-300 hover-glow"
               >
+                <span className="font-mono">{'>>'}</span>
                 {currentIndex + 1 >= questions.length ? 'See Results' : 'Next Question'}
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </div>
           )}
