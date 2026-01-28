@@ -210,3 +210,40 @@ button:focus-visible, a:focus-visible {
 .theme-transition {
   transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
+
+/* ASCII Art shine effect */
+.ascii-art-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ascii-art-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 158, 219, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.ascii-art-container:hover::before {
+  left: 100%;
+  transition: left 0.7s ease;
+}
+
+.ascii-art-glow {
+  transition: text-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.ascii-art-container:hover .ascii-art-glow {
+  text-shadow: 0 0 20px rgba(0, 158, 219, 0.6), 0 0 40px rgba(0, 158, 219, 0.4), 0 0 60px rgba(0, 158, 219, 0.2);
+  filter: brightness(1.2);
+}
