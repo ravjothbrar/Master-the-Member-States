@@ -245,6 +245,6 @@ button:focus-visible, a:focus-visible {
 }
 
 .un-emblem-container:hover .un-emblem-image {
-  filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(1234%) hue-rotate(164deg) brightness(110%) contrast(101%) drop-shadow(0 0 20px rgba(0, 158, 219, 0.6));
   transform: scale(1.02);
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg) brightness(1.1) drop-shadow(0 0 15px rgba(0, 158, 219, 0.8));
 }
