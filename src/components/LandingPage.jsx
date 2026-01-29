@@ -12,9 +12,8 @@ const UNEmblem = () => {
         alt="UN Emblem"
         className="un-emblem-image w-48 sm:w-56 md:w-64 lg:w-72 h-auto"
         style={{
-          filter: isDark
-            ? 'invert(1) sepia(1) saturate(5) hue-rotate(175deg) brightness(0.9)'
-            : 'invert(0) sepia(1) saturate(5) hue-rotate(175deg) brightness(0.4)'
+          filter: 'invert(48%) sepia(79%) saturate(1234%) hue-rotate(164deg) brightness(97%) contrast(101%)',
+          mixBlendMode: isDark ? 'screen' : 'multiply'
         }}
       />
     </div>
