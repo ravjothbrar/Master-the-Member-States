@@ -1,52 +1,16 @@
 import { ArrowRight, Github, Flag, CheckCircle, BarChart3 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-// UN Logo ASCII Art Component - UN Emblem with world map and olive branches
-const UNAsciiLogo = () => {
-  const asciiArt = `
-                                    *
-                               *   ***   *
-                              **  *****  **
-                             **  *******  **
-                            **  *********  **
-                           **  ***********  **
-                          *   *************   *
-                         *   ***************   *
-                 ****   *   *****************   *   ****
-               ******  *   *******************   *  ******
-              *******  *  *********************  *  *******
-             ********  * ***** ********* ***** * * ********
-            *********  * **** *********** **** *  *********
-           **********  * *** ************* *** *  **********
-          ***********  * ** *************** ** *  ***********
-          ***********  * * ***************** * *  ***********
-         ************  *   *****************   *  ************
-         ************  *  *******************  *  ************
-         ************  *  *******************  *  ************
-         ************  *  *******************  *  ************
-         ************  *  *******************  *  ************
-          ***********  * * ***************** * *  ***********
-          ***********  * ** *************** ** *  ***********
-           **********  * *** ************* *** *  **********
-            *********  * **** *********** **** *  *********
-             ********  * ***** ********* ***** *  ********
-              *******  *  *********************  *  *******
-               ******  *   *******************   *  ******
-                 ****   *   *****************   *   ****
-                         *   ***************   *
-                          *   *************   *
-                           **  ***********  **
-                            **  *********  **
-                             **  *******  **
-                              **  *****  **
-                               *   ***   *
-                                    *`;
-
+// UN Logo Image Component with shimmer effect
+const UNEmblem = () => {
   return (
-    <div className="ascii-art-container rounded-lg p-2 cursor-pointer select-none">
-      <pre className="ascii-art-glow text-[#009EDB] text-[0.18rem] sm:text-[0.22rem] md:text-[0.28rem] lg:text-[0.32rem] leading-[1.15] font-mono whitespace-pre">
-        {asciiArt}
-      </pre>
+    <div className="un-emblem-container rounded-lg p-2 cursor-pointer select-none overflow-hidden">
+      <img
+        src={`${import.meta.env.BASE_URL}un-emblem.png`}
+        alt="UN Emblem"
+        className="un-emblem-image w-48 sm:w-56 md:w-64 lg:w-72 h-auto"
+        style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(1234%) hue-rotate(164deg) brightness(97%) contrast(101%)' }}
+      />
     </div>
   );
 };
@@ -95,9 +59,9 @@ const LandingPage = ({ onStartQuiz }) => {
               </button>
             </div>
 
-            {/* Right side - ASCII Art Logo */}
+            {/* Right side - UN Emblem */}
             <div className="hidden md:flex flex-shrink-0">
-              <UNAsciiLogo />
+              <UNEmblem />
             </div>
           </div>
         </div>
@@ -225,19 +189,33 @@ const LandingPage = ({ onStartQuiz }) => {
               </a>
             </p>
 
-            <a
-              href="https://github.com/ravjothbrar/Master-the-Member-States"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 text-sm transition-all duration-300 px-3 py-1.5 rounded ${
-                isDark
-                  ? 'text-gray-400 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
-                  : 'text-gray-600 hover:text-[#009EDB] hover:bg-[#009EDB]/5'
-              }`}
-            >
-              <Github className="w-4 h-4" />
-              <span>View on GitHub</span>
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://ravjothbrar.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 text-sm transition-all duration-300 px-3 py-1.5 rounded border ${
+                  isDark
+                    ? 'text-gray-400 border-[#C4B5FD]/30 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:border-[#8B5CF6]'
+                    : 'text-gray-600 border-[#C4B5FD]/50 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/5 hover:border-[#8B5CF6]'
+                }`}
+              >
+                <span>Created by Ravjoth Brar</span>
+              </a>
+              <a
+                href="https://github.com/ravjothbrar/Master-the-Member-States"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 text-sm transition-all duration-300 px-3 py-1.5 rounded ${
+                  isDark
+                    ? 'text-gray-400 hover:text-[#009EDB] hover:bg-[#009EDB]/10'
+                    : 'text-gray-600 hover:text-[#009EDB] hover:bg-[#009EDB]/5'
+                }`}
+              >
+                <Github className="w-4 h-4" />
+                <span>View on GitHub</span>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
