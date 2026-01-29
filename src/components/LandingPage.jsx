@@ -3,13 +3,19 @@ import { useTheme } from '../context/ThemeContext';
 
 // UN Logo Image Component with shimmer effect
 const UNEmblem = () => {
+  const { isDark } = useTheme();
+
   return (
-    <div className="un-emblem-container rounded-lg p-2 cursor-pointer select-none overflow-hidden">
+    <div className="un-emblem-container rounded-lg p-2 cursor-pointer select-none overflow-hidden relative">
       <img
         src={`${import.meta.env.BASE_URL}un-emblem.png`}
         alt="UN Emblem"
         className="un-emblem-image w-48 sm:w-56 md:w-64 lg:w-72 h-auto"
-        style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(1234%) hue-rotate(164deg) brightness(97%) contrast(101%)' }}
+        style={{
+          filter: isDark
+            ? 'invert(1) sepia(1) saturate(5) hue-rotate(175deg) brightness(0.9)'
+            : 'invert(0) sepia(1) saturate(5) hue-rotate(175deg) brightness(0.4)'
+        }}
       />
     </div>
   );
@@ -194,10 +200,10 @@ const LandingPage = ({ onStartQuiz }) => {
                 href="https://ravjothbrar.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 text-sm transition-all duration-300 px-3 py-1.5 rounded border ${
+                className={`inline-flex items-center gap-2 text-sm transition-all duration-300 px-3 py-1.5 rounded border-2 ${
                   isDark
-                    ? 'text-gray-400 border-[#C4B5FD]/30 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:border-[#8B5CF6]'
-                    : 'text-gray-600 border-[#C4B5FD]/50 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/5 hover:border-[#8B5CF6]'
+                    ? 'text-gray-400 border-[#8B5CF6]/50 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:border-[#8B5CF6]'
+                    : 'text-gray-600 border-[#8B5CF6]/40 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/5 hover:border-[#8B5CF6]'
                 }`}
               >
                 <span>Created by Ravjoth Brar</span>
