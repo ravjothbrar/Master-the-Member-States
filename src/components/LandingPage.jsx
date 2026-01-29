@@ -3,17 +3,22 @@ import { useTheme } from '../context/ThemeContext';
 
 // UN Logo Image Component with shimmer effect
 const UNEmblem = () => {
-  const { isDark } = useTheme();
-
   return (
     <div className="un-emblem-container rounded-lg p-2 cursor-pointer select-none overflow-hidden relative">
-      <img
-        src={`${import.meta.env.BASE_URL}un-emblem.png`}
-        alt="UN Emblem"
-        className="un-emblem-image w-48 sm:w-56 md:w-64 lg:w-72 h-auto"
+      <div
+        className="un-emblem-image w-48 sm:w-56 md:w-64 lg:w-72 h-48 sm:h-56 md:h-64 lg:h-72"
         style={{
-          filter: 'invert(48%) sepia(79%) saturate(1234%) hue-rotate(164deg) brightness(97%) contrast(101%)',
-          mixBlendMode: isDark ? 'screen' : 'multiply'
+          backgroundColor: '#009EDB',
+          WebkitMaskImage: `url(${import.meta.env.BASE_URL}un-emblem.png), linear-gradient(white, white)`,
+          maskImage: `url(${import.meta.env.BASE_URL}un-emblem.png), linear-gradient(white, white)`,
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          WebkitMaskSize: 'contain, cover',
+          maskSize: 'contain, cover',
+          WebkitMaskRepeat: 'no-repeat, no-repeat',
+          maskRepeat: 'no-repeat, no-repeat',
+          WebkitMaskPosition: 'center, center',
+          maskPosition: 'center, center',
         }}
       />
     </div>

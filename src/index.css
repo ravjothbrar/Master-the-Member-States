@@ -241,10 +241,11 @@ button:focus-visible, a:focus-visible {
 }
 
 .un-emblem-image {
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .un-emblem-container:hover .un-emblem-image {
   transform: scale(1.02);
-  filter: invert(48%) sepia(79%) saturate(1234%) hue-rotate(164deg) brightness(110%) contrast(101%) drop-shadow(0 0 10px rgba(0, 158, 219, 0.6));
+  background-color: #00B4FF;
+  box-shadow: 0 0 30px rgba(0, 158, 219, 0.6);
 }
