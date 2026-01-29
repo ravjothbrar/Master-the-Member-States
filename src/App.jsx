@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Header from './components/Header';
-import CreatorBanner from './components/CreatorBanner';
 import LandingPage from './components/LandingPage';
 import QuizConfig from './components/QuizConfig';
 import Quiz from './components/Quiz';
@@ -70,7 +69,6 @@ function App() {
 
   return (
     <div className={`min-h-screen theme-transition ${isDark ? 'bg-[#0f0f1a]' : 'bg-[#fafafa]'}`}>
-      <CreatorBanner />
       <Header
         onHomeClick={handleGoHome}
         onHistoryClick={handleViewHistory}

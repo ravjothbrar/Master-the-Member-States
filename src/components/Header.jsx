@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Globe, Moon, Sun, Users, History, HelpCircle } from 'lucide-react';
+import { Globe, Moon, Sun, Users, History, HelpCircle, User } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const Header = ({ onHomeClick, onHistoryClick, onWhyClick, currentView }) => {
@@ -77,6 +77,21 @@ const Header = ({ onHomeClick, onHistoryClick, onWhyClick, currentView }) => {
               <HelpCircle className="w-4 h-4" />
               <span className="hidden sm:inline">Why?</span>
             </button>
+
+            {/* Created by Tab */}
+            <a
+              href="https://ravjothbrar.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 border ${
+                isDark
+                  ? 'text-gray-400 border-[#C4B5FD]/30 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/10 hover:border-[#8B5CF6]'
+                  : 'text-gray-600 border-[#C4B5FD]/50 hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/5 hover:border-[#8B5CF6]'
+              }`}
+            >
+              <User className="w-4 h-4" />
+              <span className="hidden sm:inline">Created by Ravjoth</span>
+            </a>
 
             {/* History Tab */}
             <button
